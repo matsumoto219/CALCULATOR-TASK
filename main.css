@@ -1,0 +1,126 @@
+/* 全体設定 */
+*,                           /* 全要素 */         
+*::before,
+*::after {
+  box-sizing: border-box;    /* widthとheightにpaddingとborderを含める */
+}
+
+html,
+body {
+  height: 100%;              /* flex中央配置等で全画面を使用するため */
+}
+
+/* 全体の見た目を設定 */
+body {
+  margin: 0;     /* 余白を消す */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;    /* 読みやすいフォントを指定 */
+  color: #111827;   /* ダークグレー */
+}
+
+/* レイアウト */
+.app {
+  min-height: 100vh;       /* 画面の高さ100%を最低限確保 */
+  display: flex;           /* flexboxレイアウトを使用 */
+  align-items: center;     /* 縦要素を中央へ */
+  justify-content: center; /* 横要素を中央へ */
+  padding: 24px;           /* 画面端とコンテンツの余白 */
+  background-color: #f0f8ff;    /* アリスブルー */
+}
+
+/* 電卓本体の設定 */
+.calculator {
+  width: min(420px, 100%);                              /* 最大420px、画面サイズ最小で100% */
+  border-radius: 20px;                                  /* 角を丸くする */
+  background: rgba(255, 255, 255, 0.9);               /* 電卓本体の色 */
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.12),     /* 影を2段重ねにして立体感を出す */
+              0 2px 8px rgba(17, 24, 39, 0.06);
+  border: 1px solid rgba(17, 24, 39, 0.06);           /* 境界線 */
+  backdrop-filter: blur(8px);                           /* 背景をぼかす */
+}
+
+/* 電卓内側 */
+.calculator__inner {
+  padding: 20px;       /* 内側の余白を設定(表示やボタンとの間隔) */
+  min-height: 480px;   /* 電卓本体の高さを設定 */
+  display: flex;           /* ディスプレイ→ボタン順に */
+  flex-direction: column;  /* 上から下に縦並び */
+  gap: 16px;
+}
+
+/* 表示ディスプレイ */
+.calculator__display {
+  height: 90px;
+  border-radius: 20px;                                      /* 角丸 */
+  background-color: rgba(17, 24, 39, 0.92);               /* ディスプレイ背景色 */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);    /* 内側にハイライト */
+  display: flex;
+  align-items: flex-end;            /* 数字を下寄せ */
+  justify-content: flex-end;        /* 数字を右寄せ */
+  padding: 14px 16px;               /* 内側余白 */
+}
+
+/* ディスプレイテキスト設定 */
+.calculator__display-text {
+  color: #ffffff;             /* 白 */
+  font-size: 34px;              /* 文字サイズ */
+  line-height: 1;             /* 文字サイズと行の高さを同じに */
+  letter-spacing: 0.02em;       /* 文字間隔を調整 */
+  text-align: right;            /* 右寄せ */
+  word-break: break-all;        /* 桁が増えてもはみ出さないよう強制改行 */
+
+  display: -webkit-box;           /* 行数制限用 */
+  -webkit-box-orient: vertical;   /* 縦指定 */
+  -webkit-line-clamp: 2;          /* 最大2行まで */
+  line-clamp: 2;
+  overflow: hidden;               /* 2行以降は隠す */
+}
+
+/* ボタン配置 */
+.calculator__keys {
+  display: grid;                            /* グリッド配置 */
+  grid-template-columns: repeat(4, 1fr);    /* 横4列に */
+  gap: 12px;
+}
+
+/* キー設定 */
+.key {
+  height: 54px;
+  border-radius: 12px;                          /* 角丸 */
+  border: 1px solid rgba(17, 24, 39, 0.12);   /* 境界線 */
+  background-color: #f3f4f6;                  /* ボタン背景カラー */
+  font-size: 25px;                              /* ボタンフォントサイズ */
+  font-weight: 500;                             /* フォント太さ */
+  color: #1a1a1a;                             /* フォントカラー */
+  cursor: pointer;                              /* カーソルを指カーソルに */
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.04),
+              0 6px 14px rgba(17, 24, 39, 0.08);
+}
+
+.key:hover {
+  opacity: 0.9;
+}
+
+.key:active {
+  transform: translateY(1px);                       /* クリック時の動作 */
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.04),
+              0 3px 10px rgba(17, 24, 39, 0.08);
+}
+
+.key--operator {
+  background-color: #e5e7eb;
+}
+
+.key--wide {
+  grid-column: span 2;    /* キーサイズ2個分に広げる */
+  height: 60px;
+}
+
+.key--equal {
+  background-color: #ffa500;   /* オレンジ */
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #ffffff;
+}
+
+.key--equal:hover {
+  opacity: 0.92;
+}
